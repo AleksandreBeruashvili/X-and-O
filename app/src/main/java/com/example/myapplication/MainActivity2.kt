@@ -20,8 +20,9 @@ class MainActivity2 : AppCompatActivity(),View.OnClickListener {
     private lateinit var button8: Button
     private lateinit var button9: Button
     private lateinit var resetbutton: Button
-    private lateinit var resultname1: TextView
-    private lateinit var resultname2: TextView
+    private lateinit var username1: TextView
+    private lateinit var username2: TextView
+
     private var game=0
     private var scoreF=0
     private var scoreS=0
@@ -33,10 +34,16 @@ class MainActivity2 : AppCompatActivity(),View.OnClickListener {
     private var fPlayer = ArrayList<Int>()
     private var sPlayer = ArrayList<Int>()
 
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
         init()
+
         score1=findViewById(R.id.score1)
         score2=findViewById(R.id.score2)
 
@@ -44,59 +51,19 @@ class MainActivity2 : AppCompatActivity(),View.OnClickListener {
             reset()
         }
     }
-    private fun reset() {
-        button1.text=""
-        button2.text=""
-        button3.text=""
-        button4.text=""
-        button5.text=""
-        button6.text=""
-        button7.text=""
-        button8.text=""
-        button9.text=""
 
-        button1.setBackgroundColor(Color.WHITE)
-        button2.setBackgroundColor(Color.WHITE)
-        button3.setBackgroundColor(Color.WHITE)
-        button4.setBackgroundColor(Color.WHITE)
-        button5.setBackgroundColor(Color.WHITE)
-        button6.setBackgroundColor(Color.WHITE)
-        button7.setBackgroundColor(Color.WHITE)
-        button8.setBackgroundColor(Color.WHITE)
-        button9.setBackgroundColor(Color.WHITE)
-
-        activePlayer=1
-
-        game=0
-
-        button1.isEnabled=true
-        button2.isEnabled=true
-        button3.isEnabled=true
-        button4.isEnabled=true
-        button5.isEnabled=true
-        button6.isEnabled=true
-        button7.isEnabled=true
-        button8.isEnabled=true
-        button9.isEnabled=true
-
-        fPlayer.clear()
-        sPlayer.clear()
-
-        if(scoreF==3 || scoreS==3){
-            activePlayer=3
-        }
-    }
 
     private fun init() {
 
-        val name1=intent.extras?.getString("firsPlayer")
-        val name2=intent.extras?.getString("secondPlayer")
+        val name1=intent.extras?.getString("player1")
+        val name2=intent.extras?.getString("player2")
 
-        resultname1=findViewById(R.id.player1)
-        resultname2=findViewById(R.id.player2)
+        username1=findViewById(R.id.player1)
+        username2=findViewById(R.id.player2)
 
-        resultname1.text=name1
-        resultname2.text=name2
+
+        username1.text=name1
+        username2.text=name2
 
 
         button1 = findViewById(R.id.button1)
@@ -118,6 +85,8 @@ class MainActivity2 : AppCompatActivity(),View.OnClickListener {
         button7.setOnClickListener(this)
         button8.setOnClickListener(this)
         button9.setOnClickListener(this)
+
+
     }
     override fun onClick(clickedView: View?) {
         if (clickedView is Button) {
@@ -141,13 +110,13 @@ class MainActivity2 : AppCompatActivity(),View.OnClickListener {
     private fun playGame(clickedView: Button, buttonNumber: Int) {
         if (activePlayer == 1) {
             clickedView.text = "X"
-            clickedView.setBackgroundColor(Color.GRAY)
+            clickedView.setBackgroundColor(Color.BLACK)
             activePlayer = 2
             fPlayer.add(buttonNumber)
 
         } else if (activePlayer == 2) {
             clickedView.text = "0"
-            clickedView.setBackgroundColor(Color.BLUE)
+            clickedView.setBackgroundColor(Color.WHITE)
             activePlayer = 1
             sPlayer.add(buttonNumber)
         }
@@ -157,7 +126,7 @@ class MainActivity2 : AppCompatActivity(),View.OnClickListener {
         }
         clickedView.isEnabled=false
         if (game==1){
-            activePlayer==3
+            activePlayer=3
         }
 
     }
@@ -216,21 +185,65 @@ class MainActivity2 : AppCompatActivity(),View.OnClickListener {
             scoreF+=1
             score1.text=scoreF.toString()
             if(scoreF==3){
-                Toast.makeText(this, "შეხვედრა მოიგო პირველმა", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "თამაში მოიგო ${username1.text}-მ", Toast.LENGTH_SHORT).show()
             }else
-                Toast.makeText(this, "თამაში მოიგო პირველმა", Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(this, "შეხვერა მოიგო ${username1.text}-მ", Toast.LENGTH_SHORT).show()
         }
         if(wPlayer==2){
             game=1
             scoreS+=1
             score2.text=scoreS.toString()
             if(scoreS==3){
-                Toast.makeText(this, "შეხვედრა მოიგო მეორემ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "თამაში მოიგო ${username2.text}-მ", Toast.LENGTH_SHORT).show()
             }else
-                Toast.makeText(this, "თამაში მოიგო მეორემ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "შეხვედრა მოიგო ${username2.text}-მ", Toast.LENGTH_SHORT).show()
         }
         if (fPlayer.size + sPlayer.size == 9 && wPlayer == 0) {
             Toast.makeText(applicationContext, " გაიმარჯვა მეგობრობამ ", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun reset() {
+        button1.text=""
+        button2.text=""
+        button3.text=""
+        button4.text=""
+        button5.text=""
+        button6.text=""
+        button7.text=""
+        button8.text=""
+        button9.text=""
+
+        button1.setBackgroundColor(Color.BLUE)
+        button2.setBackgroundColor(Color.BLUE)
+        button3.setBackgroundColor(Color.BLUE)
+        button4.setBackgroundColor(Color.BLUE)
+        button5.setBackgroundColor(Color.BLUE)
+        button6.setBackgroundColor(Color.BLUE)
+        button7.setBackgroundColor(Color.BLUE)
+        button8.setBackgroundColor(Color.BLUE)
+        button9.setBackgroundColor(Color.BLUE)
+
+        activePlayer=1
+
+        game=0
+
+        button1.isEnabled=true
+        button2.isEnabled=true
+        button3.isEnabled=true
+        button4.isEnabled=true
+        button5.isEnabled=true
+        button6.isEnabled=true
+        button7.isEnabled=true
+        button8.isEnabled=true
+        button9.isEnabled=true
+
+        fPlayer.clear()
+        sPlayer.clear()
+
+        if(scoreF==3 || scoreS==3){
+            activePlayer=3
         }
     }
 }

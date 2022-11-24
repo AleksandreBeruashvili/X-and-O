@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.widget.EditText
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,8 +26,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "გთხოვთ შეიყვანოთ მოთამაშეების სახელები ", Toast.LENGTH_SHORT).show()
             } else {
                 val change = Intent(this, MainActivity2::class.java).also {
-                    intent.putExtra("firstPlayer", resultName1)
-                    intent.putExtra("secondPlayer", resultName2)
+                    it.putExtra("player1",resultName1)
+                    it.putExtra("player2",resultName2)
                 }
                 startActivity(change)
             }
@@ -37,3 +36,4 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
